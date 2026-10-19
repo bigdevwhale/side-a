@@ -39,6 +39,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.media3.common.util.UnstableApi
 import app.sidea.R
 import app.sidea.container
@@ -76,6 +77,7 @@ fun SpotifyScreen(home: Home, go: Go) {
     val levels = remember { mutableStateListOf(Level(null, top)) }
     var filter by remember { mutableStateOf("") }
     val level = levels.last()
+    val error by spotify.error.collectAsStateWithLifecycle()
 
     LaunchedEffect(level) {
         if (level.items != null) return@LaunchedEffect
@@ -98,7 +100,7 @@ fun SpotifyScreen(home: Home, go: Go) {
         Spacer(Modifier.height(8.dp))
         val items = level.items
         when {
-            level.failed -> Text(stringResource(R.string.spotify_browse_failed, spotify.error.value.orEmpty()), style = UType.Muted, modifier = Modifier.padding(16.dp))
+            level.failed -> Text(stringResource(R.string.spotify_browse_failed, error.orEmpty()), style = UType.Muted, modifier = Modifier.padding(16.dp))
             items == null -> Box(Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) { CircularProgressIndicator(color = U.c.lamp) }
             else -> {
                 val q = filter.trim().lowercase()
