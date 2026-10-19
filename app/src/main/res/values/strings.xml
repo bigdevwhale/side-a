@@ -236,14 +236,23 @@
     <string name="spotify_premium">Starting a chosen album needs Spotify Premium. A record learns its Spotify address the first time it plays there; until then the search opens.</string>
     <string name="spotify_why_link">Spotify doesn’t know this record’s address yet, so its search opened. Play the album there once and next time it starts from here.</string>
     <string name="spotify_why_failed">Spotify didn’t connect (%s), so its search opened. On Xiaomi phones, allow Side A to start Spotify when asked.</string>
-    <string name="from_spotify">Browse your Spotify</string>
-    <string name="from_spotify_sub">Recently played, your library and picks, without opening Spotify.</string>
+    <string name="from_spotify">Find it in Spotify</string>
+    <string name="from_spotify_sub">Search its whole catalogue, or browse recently played, your library and picks, without opening Spotify.</string>
     <string name="spotify_browse">Your Spotify</string>
     <string name="spotify_filter">Narrow down this shelf</string>
     <string name="spotify_browse_failed">Spotify didn’t answer (%s). Check the connection in Settings → Spotify.</string>
     <string name="spotify_empty">Nothing here.</string>
     <string name="spotify_album">album</string>
     <string name="spotify_take">To the counter</string>
+    <string name="spotify_search">Search Spotify</string>
+    <string name="spotify_search_key">Searching needs your Spotify Client ID and Spotify’s permission (Settings → Spotify).</string>
+    <string name="spotify_search_failed">Spotify didn’t answer: %s</string>
+    <string name="spotify_single">single</string>
+    <string name="spotify_compilation">compilation</string>
+    <string name="shared_fetching">Taking the sleeve out of Spotify…</string>
+    <string name="shared_not_album">That isn’t a Spotify album or song.</string>
+    <string name="shared_no_key">To fetch its name and cover, add your Spotify Client ID in Settings → Spotify.</string>
+    <string name="shared_by_hand">Write the name myself</string>
     <string name="copy">Copy</string>
     <string name="set_players">Players</string>
     <string name="set_players_sub">Listening along with a streaming app</string>
@@ -254,7 +263,7 @@
     <string name="set_language">Language</string>
     <string name="set_lang_system">System</string>
     <string name="set_about">About</string>
-    <string name="set_privacy">Side A has no account, no ads and no internet permission. Your shelf, notes and listening stay on this phone. Music isn’t sold or streamed here: it’s yours, from your folders or your own player.</string>
+    <string name="set_privacy">Side A has no account, no ads and no analytics. It goes online only to search Spotify’s catalogue, when you’ve connected Spotify and search or share an album. Your shelf, notes and listening stay on this phone. Music isn’t sold or streamed here: it’s yours, from your folders or your own player.</string>
 
     <plurals name="plays">
         <item quantity="one">%d play</item>

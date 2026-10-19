@@ -135,11 +135,31 @@ class Spotify(private val context: Context) {
         .putExtra("SCOPES", arrayOf("app-remote-control"))
         .putExtra("STATE", UUID.randomUUID().toString())
 
-    /** What Spotify said to the permission request, if it refused. */
+    /**
+     * Reads Spotify's answer to the permission request: keeps the short-lived key it hands over (for
+     * searching its catalogue), and returns why it refused, or null if it agreed.
+     */
     fun refused(code: Int, data: Intent?): String? {
         val reply = data?.getBundleExtra("REPLY")
         val error = reply?.getString("ERROR") ?: data?.getStringExtra("ERROR")
+        val key = reply?.getString("ACCESS_TOKEN") ?: data?.getStringExtra("ACCESS_TOKEN")
+        if (key != null) {
+            token = key
+            val seconds = reply?.getInt("EXPIRES_IN", 3600) ?: 3600
+            tokenUntil = System.currentTimeMillis() + (seconds - 60).coerceAtLeast(60) * 1000L
+        }
         return error ?: if (code == Activity.RESULT_OK) null else "cancelled"
+    }
+
+    @Volatile private var token: String? = null
+    @Volatile private var tokenUntil = 0L
+
+    /** The Web API key, while it's still good. */
+    fun key(): String? = token?.takeIf { System.currentTimeMillis() < tokenUntil }
+
+    /** The key was refused before its time: forget it. */
+    fun expired() {
+        token = null
     }
 
     fun failed(why: String) {

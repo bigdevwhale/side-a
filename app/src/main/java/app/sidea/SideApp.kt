@@ -40,6 +40,9 @@ class AppContainer(context: Context) {
     /** Where a tap from outside wants to go ("room" from the media notification) and when. */
     val open = MutableStateFlow<Pair<String, Long>?>(null)
 
+    /** Text shared into the app (a Spotify link), waiting to be looked at. */
+    val shared = MutableStateFlow<String?>(null)
+
     /** The room itself sent you to another app (the streaming player): leaving doesn't lift the needle. */
     @Volatile var excused = false
 

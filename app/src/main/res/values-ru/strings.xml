@@ -229,14 +229,23 @@
     <string name="spotify_premium">Чтобы включать выбранный альбом, нужен Spotify Premium. Адрес альбома в Spotify пластинка узнаёт, когда впервые там прозвучит; до этого открывается поиск.</string>
     <string name="spotify_why_link">Адрес этой пластинки в Spotify пока не известен, поэтому открылся поиск. Включи альбом там один раз — в следующий раз он запустится отсюда.</string>
     <string name="spotify_why_failed">Spotify не подключился (%s), поэтому открылся поиск. На телефонах Xiaomi разреши «Стороне А» запускать Spotify, когда система спросит.</string>
-    <string name="from_spotify">Полистать свой Spotify</string>
-    <string name="from_spotify_sub">Недавнее, медиатека и подборки — не открывая Spotify.</string>
+    <string name="from_spotify">Найти в Spotify</string>
+    <string name="from_spotify_sub">Поиск по всему каталогу или недавнее, медиатека и подборки — не открывая Spotify.</string>
     <string name="spotify_browse">Твой Spotify</string>
     <string name="spotify_filter">Найти на этой полке</string>
     <string name="spotify_browse_failed">Spotify не ответил (%s). Проверь подключение в Настройках → Spotify.</string>
     <string name="spotify_empty">Здесь пусто.</string>
     <string name="spotify_album">альбом</string>
     <string name="spotify_take">На кассу</string>
+    <string name="spotify_search">Искать в Spotify</string>
+    <string name="spotify_search_key">Для поиска нужен Client ID и разрешение Spotify (Настройки → Spotify).</string>
+    <string name="spotify_search_failed">Spotify не ответил: %s</string>
+    <string name="spotify_single">сингл</string>
+    <string name="spotify_compilation">сборник</string>
+    <string name="shared_fetching">Достаю конверт из Spotify…</string>
+    <string name="shared_not_album">Это не альбом и не песня из Spotify.</string>
+    <string name="shared_no_key">Чтобы подтянуть название и обложку, добавь свой Spotify Client ID в Настройках → Spotify.</string>
+    <string name="shared_by_hand">Вписать название самому</string>
     <string name="copy">Скопировать</string>
     <string name="set_players">Плееры</string>
     <string name="set_players_sub">Слушать вместе со стримингом</string>
@@ -247,7 +256,7 @@
     <string name="set_language">Язык</string>
     <string name="set_lang_system">Как в системе</string>
     <string name="set_about">О приложении</string>
-    <string name="set_privacy">Без аккаунта, без рекламы и без доступа в интернет. Полка, заметки и прослушивания остаются на этом телефоне. Музыку здесь не продают и не стримят: она твоя — из твоих папок или твоего плеера.</string>
+    <string name="set_privacy">Без аккаунта, рекламы и аналитики. В интернет — только для поиска по каталогу Spotify, когда он подключён и ты ищешь или делишься альбомом. Полка, заметки и прослушивания остаются на этом телефоне. Музыку здесь не продают и не стримят: она твоя — из твоих папок или твоего плеера.</string>
 
     <plurals name="plays">
         <item quantity="one">%d прослушивание</item>

@@ -48,6 +48,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun opened(intent: Intent?) {
+        if (intent?.action == Intent.ACTION_SEND) {
+            val text = listOfNotNull(intent.getStringExtra(Intent.EXTRA_SUBJECT), intent.getStringExtra(Intent.EXTRA_TEXT)).joinToString(" ")
+            if (text.isNotBlank()) container.shared.value = text
+            return
+        }
         val open = intent?.getStringExtra(EXTRA_OPEN) ?: return
         container.open.value = open to System.currentTimeMillis()
     }

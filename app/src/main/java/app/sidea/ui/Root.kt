@@ -11,6 +11,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.media3.common.util.UnstableApi
@@ -43,6 +44,7 @@ import app.sidea.ui.room.RoomScreen
 import app.sidea.ui.settings.SettingsScreen
 import app.sidea.ui.shop.BuyScreen
 import app.sidea.ui.shop.ShopScreen
+import app.sidea.ui.shop.SharedScreen
 import app.sidea.ui.shop.SpotifyScreen
 import app.sidea.ui.theme.U
 import java.time.LocalDate
@@ -99,6 +101,13 @@ class Go(private val nav: NavHostController) {
     fun shop() = nav.navigate("shop") { launchSingleTop = true }
     fun buy() = nav.navigate("buy") { launchSingleTop = true }
     fun spotify() = nav.navigate("spotify") { launchSingleTop = true }
+    fun shared() = nav.navigate("shared") { launchSingleTop = true }
+
+    /** To the counter, in place of the screen that was only on the way there. */
+    fun buyInstead() {
+        nav.popBackStack()
+        buy()
+    }
     fun room(id: Long) = nav.navigate("room/$id") { launchSingleTop = true }
     fun archive() = nav.navigate("archive") { launchSingleTop = true }
     fun settings() = nav.navigate("settings") { launchSingleTop = true }
@@ -133,6 +142,16 @@ fun SideRoot(settings: Settings) {
     LaunchedEffect(settings.onboarded, route) {
         if (settings.onboarded && route == "welcome") nav.navigate("main") { popUpTo("welcome") { inclusive = true } }
     }
+    // A Spotify link shared into the app: to the counter with it.
+    val shared by container.shared.collectAsStateWithLifecycle()
+    var sharedText by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf("") }
+    LaunchedEffect(shared, settings.onboarded) {
+        val text = shared ?: return@LaunchedEffect
+        if (!settings.onboarded) return@LaunchedEffect
+        sharedText = text
+        container.shared.value = null
+        go.shared()
+    }
     // The media notification was tapped: back to the room.
     val open by container.open.collectAsStateWithLifecycle()
     val room by container.room.collectAsStateWithLifecycle()
@@ -161,6 +180,7 @@ fun SideRoot(settings: Settings) {
             composable("shop") { ShopScreen(home, go) }
             composable("buy") { BuyScreen(home, go) }
             composable("spotify") { SpotifyScreen(home, go) }
+            composable("shared") { SharedScreen(sharedText, home, go) }
             composable("room/{id}", arguments = listOf(navArgument("id") { type = NavType.LongType })) { e ->
                 RoomScreen(e.arguments?.getLong("id") ?: 0L, home, go)
             }
