@@ -159,7 +159,7 @@
     <string name="drop_v">Lower the needle</string>
     <string name="drop_t">Play</string>
     <string name="lift">Lift the needle</string>
-    <string name="arm_hint">Drag the arm to move the needle. While it’s down, it scratches the record.</string>
+    <string name="arm_hint">Tap the lever by the arm (or the button) to raise and lower the needle. Drag the arm to move it; with the needle down, that scratches the record.</string>
     <string name="tape_hint">Winding takes as long as on a real deck. ⏏ turns the cassette over.</string>
     <string name="side_over_v">Side A has run out.</string>
     <string name="side_over_t">Side A has run out.</string>

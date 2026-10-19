@@ -153,7 +153,7 @@
     <string name="drop_v">Опустить иглу</string>
     <string name="drop_t">Играть</string>
     <string name="lift">Поднять иглу</string>
-    <string name="arm_hint">Тяни тонарм, чтобы переставить иглу. Опущенная игла царапает пластинку.</string>
+    <string name="arm_hint">Нажми на рычажок у тонарма (или на кнопку), чтобы поднять или опустить иглу. Тонарм можно тянуть, но опущенная игла при этом царапает пластинку.</string>
     <string name="tape_hint">Перемотка идёт столько же, сколько на настоящей деке. ⏏ переворачивает кассету.</string>
     <string name="side_over_v">Сторона А закончилась.</string>
     <string name="side_over_t">Сторона А закончилась.</string>

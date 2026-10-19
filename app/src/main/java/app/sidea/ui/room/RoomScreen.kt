@@ -23,6 +23,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.OpenInNew
+import androidx.compose.material.icons.rounded.KeyboardArrowDown
+import androidx.compose.material.icons.rounded.KeyboardArrowUp
 import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.SkipNext
@@ -185,6 +187,14 @@ fun RoomScreen(id: Long, home: Home, go: Go, preview: RoomPreview? = null) {
                         lifted = !now.playing,
                         onMove = if (folder && now.phase == Phase.SIDE && preview == null) container.deck::moveTo else null,
                         modifier = Modifier.fillMaxWidth().aspectRatio(1f / 0.86f),
+                        onCue = if (preview != null) null else ({
+                            when {
+                                folder && now.playing -> container.deck.lift()
+                                folder -> container.deck.drop()
+                                now.playing -> container.stream.pause()
+                                else -> container.stream.play()
+                            }
+                        }),
                     )
                 }
                 Spacer(Modifier.height(16.dp))
@@ -324,8 +334,8 @@ private fun FolderControls(now: Now, container: app.sidea.AppContainer) {
             Spacer(Modifier.height(10.dp))
             Text(stringResource(R.string.tape_hint), style = UType.Small, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
         } else {
-            if (now.playing) SoftButton(stringResource(R.string.lift), deck::lift, Modifier.fillMaxWidth())
-            else PrimaryButton(stringResource(R.string.drop_v), deck::drop, Modifier.fillMaxWidth())
+            if (now.playing) SoftButton(stringResource(R.string.lift), deck::lift, Modifier.fillMaxWidth(), icon = Icons.Rounded.KeyboardArrowUp)
+            else PrimaryButton(stringResource(R.string.drop_v), deck::drop, Modifier.fillMaxWidth(), icon = Icons.Rounded.KeyboardArrowDown)
             Spacer(Modifier.height(10.dp))
             Text(stringResource(R.string.arm_hint), style = UType.Small, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
         }
