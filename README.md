@@ -6,7 +6,7 @@
 
 ### There is too much music. Fall back in love with it.
 
-*One album a week from the record shop, a whole side at a time, on a turntable or a tape deck. Skip a song and the record keeps the scratch; wind a cassette and it takes as long as a real deck. Records wear in as you love them, and you write a line on the inner sleeve after listening. Play your own files with real vinyl crackle, or listen along with Spotify and other players. Free, no ads, no account, no internet.*
+*One album a week from the record shop, a whole side at a time, on a turntable or a tape deck. Skip a song and the record keeps the scratch; wind a cassette and it takes as long as a real deck. Records wear in as you love them, and you write a line on the inner sleeve after listening. Play your own files with real vinyl crackle, or listen along with Spotify and other players. Free, no ads, no account.*
 
 [![Android CI](https://github.com/bigdevwhale/side-a/actions/workflows/android.yml/badge.svg)](https://github.com/bigdevwhale/side-a/actions/workflows/android.yml)
 [![Release](https://img.shields.io/github/v/release/bigdevwhale/side-a?color=FF9A3C&label=download&logo=android)](https://github.com/bigdevwhale/side-a/releases/latest)
@@ -42,7 +42,7 @@ Prefer to change songs freely? Turn on **Songs by button** in settings: previous
 ## How it works
 
 1. **The record shop.** The shop gets one delivery a week, on the day you pick. You can buy one album a week, and a week you don't use doesn't carry over. Others can wait on the counter (up to six). The first three are a gift, for the records you already own and love.
-2. **Find an album.** Three ways: *from your player* (whatever Spotify, YouTube Music or Yandex Music is playing now, with its cover), *from a folder* on the phone (your own files, sorted into side A and side B), or *write the name*.
+2. **Find an album.** *From your player* (whatever Spotify, YouTube Music or Yandex Music is playing now, with its cover), *find it in Spotify* (search the whole catalogue, or browse your recent plays, library and picks), *Share → Side A* from Spotify, *from a folder* on the phone (your own files, sorted into side A and side B), or *write the name*.
 3. **The shelf.** Twenty‑four places: three walnut shelves of spines, or a black rack of cassettes with the titles in ballpoint. When it's full, one goes to the **second‑hand shop** with a farewell line. It keeps its notes and scratches, and can be bought back as a week's buy.
 4. **The listening room.** Thirty seconds of silence first, to rest your ears. Then the needle drops on side A. When it runs out, turn the record over. Pick up the phone and leave the app with the screen on, and the needle goes up. Put the phone down with the screen off and the music plays on.
 5. **The inner sleeve.** After a long enough sitting, write a line on the sleeve: where you were, what it brought back. A year later it'll be there.
@@ -64,7 +64,7 @@ Spotify starts a chosen album only for apps registered with it. If you'd like th
 1. In [Spotify's developer dashboard](https://developer.spotify.com/dashboard), create an app (any name), tick **Android**, and add the package name, SHA‑1 fingerprint and redirect URI that the settings show (tap to copy).
 2. Paste the app's **Client ID** into Side A and tap *Connect*; Spotify asks for your permission once.
 
-From then on *Play the album* starts it in Spotify quietly, through Spotify's own [App Remote SDK](https://github.com/spotify/android-sdk), which talks to the Spotify app on the phone (Side A still has no internet permission). A record learns its Spotify address when it's added from the player or first plays there. Starting a chosen album needs Spotify Premium; an app in Spotify's development mode serves up to 25 people you add yourself.
+From then on *Play the album* starts it in Spotify quietly, from the first song, through Spotify's own [App Remote SDK](https://github.com/spotify/android-sdk), which talks to the Spotify app on the phone. *Find it in Spotify* in the shop searches Spotify's whole catalogue (its Web API) and browses your own Spotify shelves, and *Share → Side A* in Spotify sends any album (or a song's album) straight to the counter, with its cover, year and songs already split into two sides. A record added by name learns its Spotify address the first time it plays there. Starting a chosen album needs Spotify Premium; an app in Spotify's development mode serves up to 25 people you add yourself.
 
 ## Real recordings
 
@@ -72,7 +72,7 @@ Optionally, Side A lays a **real recording** of vinyl crackle or tape hiss under
 
 ## Privacy
 
-There's no account, no ads, no analytics and no internet permission. The shelf, notes and listening times stay on the phone. Folder access is only for the folders you pick; notification access only reads the playing song.
+There's no account, no ads and no analytics. The shelf, notes and listening times stay on the phone. Folder access is only for the folders you pick; notification access only reads the playing song. Side A goes online for one thing only: with Spotify connected, when you search its catalogue or share an album from it, it asks api.spotify.com (and fetches the covers), with the short-lived key Spotify hands over. Without a Spotify Client ID it never connects to anything.
 
 ## Building
 

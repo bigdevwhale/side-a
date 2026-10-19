@@ -113,12 +113,23 @@ class Spotify(private val context: Context) {
         }
     }
 
-    /** An item's picture, from Spotify's own cache. */
+    /**
+     * An item's picture, from Spotify's own cache. A shelf has none of its own, so it borrows the
+     * picture of the first thing on it.
+     */
     fun image(item: ListItem, done: (Bitmap?) -> Unit) {
         val app = remote
+        if (app == null || !app.isConnected) return done(null)
         val uri = item.imageUri
-        if (app == null || !app.isConnected || uri == null) return done(null)
-        app.imagesApi.getImage(uri, Image.Dimension.LARGE).setResultCallback { done(it) }.setErrorCallback { done(null) }
+        if (uri != null && !uri.raw.isNullOrBlank()) {
+            app.imagesApi.getImage(uri, Image.Dimension.LARGE).setResultCallback { done(it) }.setErrorCallback { done(null) }
+            return
+        }
+        if (!item.hasChildren) return done(null)
+        app.contentApi.getChildrenOfItem(item, 1, 0).setResultCallback { list ->
+            val first = list.items?.firstOrNull()?.takeIf { it.imageUri != null && !it.imageUri.raw.isNullOrBlank() }
+            if (first == null) done(null) else app.imagesApi.getImage(first.imageUri, Image.Dimension.LARGE).setResultCallback { done(it) }.setErrorCallback { done(null) }
+        }.setErrorCallback { done(null) }
     }
 
     /**

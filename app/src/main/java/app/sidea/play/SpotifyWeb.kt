@@ -45,7 +45,10 @@ object SpotifyWeb {
         c.setRequestProperty("Authorization", "Bearer $token")
         try {
             if (c.responseCode == 401) throw Expired()
-            if (c.responseCode !in 200..299) throw IllegalStateException("Spotify ${c.responseCode}")
+            if (c.responseCode !in 200..299) {
+                val why = runCatching { JSONObject(c.errorStream.bufferedReader().use { it.readText() }).getJSONObject("error").optString("message") }.getOrNull()
+                throw IllegalStateException(listOfNotNull("Spotify ${c.responseCode}", why?.takeIf { it.isNotBlank() }).joinToString(": "))
+            }
             return JSONObject(c.inputStream.bufferedReader().use { it.readText() })
         } finally {
             c.disconnect()
@@ -70,7 +73,7 @@ object SpotifyWeb {
     /** Albums matching [query], best first. */
     suspend fun search(token: String, query: String): List<Album> = withContext(Dispatchers.IO) {
         val q = URLEncoder.encode(query, "UTF-8")
-        val items = get(token, "/search?type=album&limit=30&q=$q").getJSONObject("albums").getJSONArray("items")
+        val items = get(token, "/search?type=album&limit=10&q=$q").getJSONObject("albums").getJSONArray("items")
         (0 until items.length()).map { album(items.getJSONObject(it)) }
     }
 

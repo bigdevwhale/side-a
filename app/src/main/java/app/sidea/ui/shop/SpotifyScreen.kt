@@ -21,6 +21,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
+import androidx.compose.material.icons.rounded.Album
+import androidx.compose.material.icons.rounded.LibraryMusic
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -197,10 +199,12 @@ private fun Spinner() {
     Box(Modifier.fillMaxWidth().padding(32.dp), contentAlignment = Alignment.Center) { CircularProgressIndicator(color = U.c.lamp) }
 }
 
+/** A cover, or (for a shelf with nothing to borrow a picture from) a shelf of records drawn small. */
 @Composable
-private fun Cover(art: Bitmap?) {
-    Box(Modifier.size(52.dp).clip(U.RSm).background(U.c.surface2)) {
-        art?.let { Image(it.asImageBitmap(), null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop) }
+private fun Cover(art: Bitmap?, shelf: Boolean = false) {
+    Box(Modifier.size(52.dp).clip(U.RSm).background(U.c.surface2), contentAlignment = Alignment.Center) {
+        if (art != null) Image(art.asImageBitmap(), null, Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+        else Icon(if (shelf) Icons.Rounded.LibraryMusic else Icons.Rounded.Album, null, Modifier.size(24.dp), tint = U.c.faint)
     }
 }
 
@@ -239,10 +243,11 @@ private fun Shelf(item: ListItem, spotify: Spotify, onClick: () -> Unit) {
             .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Cover(art)
+        Cover(art, shelf = item.hasChildren && !album)
         Spacer(Modifier.width(12.dp))
         Column(Modifier.weight(1f)) {
-            Text(item.title.orEmpty(), style = UType.Strong.copy(color = if (enabled) U.c.ink else U.c.faint), maxLines = 1, overflow = TextOverflow.Ellipsis)
+            // Spotify sometimes sends a title with its placeholder left in ("New episode from {0}").
+            Text(item.title.orEmpty().replace(Regex("""\s*\{\d+\}"""), "…"), style = UType.Strong.copy(color = if (enabled) U.c.ink else U.c.faint), maxLines = 1, overflow = TextOverflow.Ellipsis)
             val sub = listOfNotNull(item.subtitle?.takeIf { it.isNotBlank() }, if (album) stringResource(R.string.spotify_album) else null).joinToString(" · ")
             if (sub.isNotEmpty()) Text(sub, style = UType.Muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
