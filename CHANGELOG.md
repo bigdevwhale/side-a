@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1]
+
+- **Songs by button is on for new installs:** previous and next sit in the listening room from the start.
+- **Clearer hints in the room:** how to change songs, and that tapping the tonearm raises and lowers the needle.
+- **Spotify setup explains itself:** when Spotify doesn't recognise the app, settings say which package and SHA‑1 to add in Spotify's dashboard.
+
 ## [1.0.0]
 
 The first release.
