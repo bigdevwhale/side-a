@@ -111,6 +111,8 @@ fun SettingsScreen(home: Home, go: Go) {
                 Segmented(SILENCES, s.silence, { if (it == 0) stringResource(R.string.off) else stringResource(R.string.seconds, it) }, { n -> set { it.copy(silence = n) } })
                 Spacer(Modifier.height(16.dp))
                 Toggle(w(R.string.set_strict_v, R.string.set_strict_t), stringResource(R.string.set_strict_sub), s.strict) { v -> set { it.copy(strict = v) } }
+                Spacer(Modifier.height(10.dp))
+                Toggle(stringResource(R.string.set_skips), w(R.string.set_skips_sub_v, R.string.set_skips_sub_t), s.skips) { v -> set { it.copy(skips = v) } }
                 Spacer(Modifier.height(12.dp))
                 Text(w(R.string.set_crackle_v, R.string.set_crackle_t), style = UType.Strong)
                 Text(w(R.string.set_crackle_sub_v, R.string.set_crackle_sub_t), style = UType.Muted)

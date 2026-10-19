@@ -115,6 +115,9 @@ class StreamWatch(private val context: Context, private val db: SideDatabase, pr
         overlay.start(prefs.tape)
     }
 
+    /** Until then (elapsed realtime) song changes come from the room itself and leave no mark. */
+    private var quietUntil = 0L
+
     /** The last position report: where, when (elapsed realtime) and how fast. */
     private var lastState: PlaybackState? = null
 
@@ -161,7 +164,7 @@ class StreamWatch(private val context: Context, private val db: SideDatabase, pr
         override fun onPlaybackStateChanged(state: PlaybackState?) {
             val before = lastState
             // The same song, but the position isn't where it should be: someone moved the arm.
-            if (before != null && state != null && _state.value.matched && state.state == PlaybackState.STATE_PLAYING) {
+            if (before != null && state != null && _state.value.matched && state.state == PlaybackState.STATE_PLAYING && SystemClock.elapsedRealtime() > quietUntil) {
                 val expected = at(before, state.lastPositionUpdateTime)
                 if (state.position >= 0 && Needle.jumped(expected, state.position)) scratchHere(state.position)
             }
@@ -192,7 +195,7 @@ class StreamWatch(private val context: Context, private val db: SideDatabase, pr
         val r = old.record
         val matched = r != null && now != null && Match.album(r.title, r.artist, now.album, now.artist)
         // The song changed before its end: skipped. The needle lands on the new one.
-        val skipped = changed && matched && old.matched && old.now != null && now?.title != old.now.title &&
+        val skipped = changed && matched && old.matched && old.now != null && now?.title != old.now.title && SystemClock.elapsedRealtime() > quietUntil &&
             Needle.skipped(lastState?.let { at(it) } ?: 0L, old.now.durationMs)
         _state.update { it.copy(now = now, matched = matched, atMs = ps?.let { s -> at(s) } ?: 0, pickedUp = if (now?.playing == true) false else it.pickedUp) }
         sync()
@@ -317,6 +320,13 @@ class StreamWatch(private val context: Context, private val db: SideDatabase, pr
     }
 
     fun pause() = controller?.transportControls?.pause()
+
+    /** Next (or previous) song in the player, by the room's own button: no scratch for it. */
+    fun skip(delta: Int) {
+        val c = controller ?: return
+        quietUntil = SystemClock.elapsedRealtime() + 4_000
+        if (delta > 0) c.transportControls.skipToNext() else c.transportControls.skipToPrevious()
+    }
 
     /** Gets up from the record: saves the sitting and returns it. */
     fun end(): StreamState {

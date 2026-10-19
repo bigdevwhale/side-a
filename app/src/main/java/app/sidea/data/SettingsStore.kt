@@ -47,6 +47,8 @@ data class Settings(
     val crackle: Crackle = Crackle.SOFT,
     /** Lay a real recording of vinyl crackle or tape hiss under the music, here and over other players. */
     val recorded: Boolean = false,
+    /** Previous and next buttons in the room, changing songs without a scratch or a wait. */
+    val skips: Boolean = false,
     /** The streaming player last heard, to open it from the turntable. */
     val player: String = "",
 ) {
@@ -78,6 +80,7 @@ class SettingsStore(context: Context) {
         crackle = this[CRACKLE]?.let { c -> Crackle.entries.firstOrNull { it.name == c } } ?: Crackle.SOFT,
         player = this[PLAYER] ?: "",
         recorded = this[RECORDED] ?: false,
+        skips = this[SKIPS] ?: false,
     )
 
     suspend fun now(): Settings = settings.first()
@@ -95,6 +98,7 @@ class SettingsStore(context: Context) {
             it[CRACKLE] = s.crackle.name
             it[PLAYER] = s.player
             it[RECORDED] = s.recorded
+            it[SKIPS] = s.skips
         }
     }
 
@@ -109,5 +113,6 @@ class SettingsStore(context: Context) {
         val CRACKLE = stringPreferencesKey("crackle")
         val PLAYER = stringPreferencesKey("player")
         val RECORDED = booleanPreferencesKey("recorded")
+        val SKIPS = booleanPreferencesKey("skips")
     }
 }

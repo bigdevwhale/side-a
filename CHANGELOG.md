@@ -12,5 +12,6 @@ The first release.
 - **Wear:** sleeves, spines, vinyl and labels age with listening; worn records crackle more, stretched tapes wobble more.
 - **Listening along** with Spotify, YouTube Music, Yandex Music and others through notification access: the album is recognised, its songs learnt, skips scratch the record. *Play the album* starts it from the room where the player allows it.
 - **Real recordings (optional):** CC0 vinyl crackle and tape hiss, under folder records and over your streaming app.
+- **Songs by button (optional):** previous and next in the room; the needle lifts and drops by itself, a cassette skips the winding, and a skip from the room never scratches.
 - **The inner sleeve:** a line written after listening, kept with the record.
 - English and Russian.

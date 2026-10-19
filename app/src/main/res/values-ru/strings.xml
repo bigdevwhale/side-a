@@ -186,6 +186,11 @@
     <string name="set_strict_v">Телефон в руке — игла поднимается</string>
     <string name="set_strict_t">Телефон в руке — плёнка встаёт</string>
     <string name="set_strict_sub">Выйдешь из приложения с включённым экраном — музыка встанет на паузу. С выключенным экраном она играет дальше.</string>
+    <string name="set_skips">Песни по кнопке</string>
+    <string name="set_skips_sub_v">«Назад» и «дальше» в слушальне. Игла сама поднимется и опустится, так что царапин не будет.</string>
+    <string name="set_skips_sub_t">«Назад» и «дальше» в слушальне — сразу к песне, без ожидания перемотки и без замятий.</string>
+    <string name="song_prev">Назад</string>
+    <string name="song_next">Дальше</string>
     <string name="set_crackle_v">Треск винила</string>
     <string name="set_crackle_t">Шипение и «плавание» плёнки</string>
     <string name="set_crackle_sub_v">Звук самой пластинки под музыкой — для альбомов из папки. Растёт с износом.</string>

@@ -37,6 +37,8 @@ Pick a look at the start, and the whole app follows: how it looks, how it sounds
 
 Each look comes in its own light or dark, or follows the phone.
 
+Prefer to change songs freely? Turn on **Songs by button** in settings: previous and next appear in the listening room, the needle lifts and drops by itself (no scratch), and a cassette jumps straight to the song with no winding.
+
 ## How it works
 
 1. **The record shop.** The shop gets one delivery a week, on the day you pick. You can buy one album a week, and a week you don't use doesn't carry over. Others can wait on the counter (up to six). The first three are a gift, for the records you already own and love.

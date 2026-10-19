@@ -271,6 +271,35 @@ class Deck(private val context: Context, private val db: SideDatabase, private v
         moveTo(s.sideAtMs.toFloat() / s.sideMs.coerceAtLeast(1))
     }
 
+    /**
+     * Goes to the next (or previous) song by hand, with the "songs by button" setting on: the needle
+     * goes up, the arm moves, the needle comes down, so nothing is scratched. On a cassette it skips
+     * the winding. Past the end of side A it turns the record over; back from the start of side B it
+     * turns it back. Back more than a few seconds into a song starts it again.
+     */
+    fun skip(delta: Int) {
+        val s = _state.value
+        if (s.phase == Phase.IDLE || s.tracks.isEmpty()) return
+        val into = if (s.phase == Phase.SIDE) player.currentPosition else Long.MAX_VALUE
+        val target = when {
+            s.phase == Phase.FLIP && delta > 0 -> s.split
+            delta < 0 && into > 3_000 && s.phase == Phase.SIDE -> s.index
+            else -> s.index + delta
+        }.coerceIn(0, s.tracks.size - 1)
+        val playing = player.playWhenReady || s.phase != Phase.SIDE
+        winder?.cancel()
+        winder = null
+        _state.update { it.copy(winding = 0) }
+        // Needle up first: a seek with it raised leaves no mark.
+        player.playWhenReady = false
+        val side = if (target < s.split) 0 else 1
+        if (side != s.side || s.phase != Phase.SIDE) side(side)
+        player.seekTo(target - Sides.range(side, s.tracks.size, s.split).first, 0)
+        lastIndex = target
+        lastAt = 0
+        if (playing) player.play()
+    }
+
     /** Moves the arm to [fraction] of the way through the side (0 at the edge). Scratches if the needle is down. */
     fun moveTo(fraction: Float) {
         val s = _state.value

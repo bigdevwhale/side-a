@@ -25,6 +25,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.OpenInNew
 import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.PlayArrow
+import androidx.compose.material.icons.rounded.SkipNext
+import androidx.compose.material.icons.rounded.SkipPrevious
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -206,6 +208,14 @@ fun RoomScreen(id: Long, home: Home, go: Go, preview: RoomPreview? = null) {
                     now.pickedUp -> PickedUp { if (folder) container.deck.drop() else container.stream.play() }
                     folder -> FolderControls(now, container)
                     else -> StreamControls(r, stream, now, ::openPlayer)
+                }
+                // Songs by button, for those who want them.
+                if (home.settings.skips && !missing && !now.pickedUp && (folder || stream.matched)) {
+                    Spacer(Modifier.height(12.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                        SoftButton(stringResource(R.string.song_prev), { if (folder) container.deck.skip(-1) else container.stream.skip(-1) }, Modifier.weight(1f), icon = Icons.Rounded.SkipPrevious)
+                        SoftButton(stringResource(R.string.song_next), { if (folder) container.deck.skip(1) else container.stream.skip(1) }, Modifier.weight(1f), icon = Icons.Rounded.SkipNext)
+                    }
                 }
                 Spacer(Modifier.height(28.dp))
             }

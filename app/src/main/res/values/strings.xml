@@ -193,6 +193,11 @@
     <string name="set_strict_v">Picking up the phone lifts the needle</string>
     <string name="set_strict_t">Picking up the phone stops the tape</string>
     <string name="set_strict_sub">Leave the app with the screen on and the music pauses. With the screen off it plays on.</string>
+    <string name="set_skips">Songs by button</string>
+    <string name="set_skips_sub_v">Previous and next in the listening room. The needle lifts and comes down by itself, so nothing gets scratched.</string>
+    <string name="set_skips_sub_t">Previous and next in the listening room, straight to the song, with no wait for winding and no creases.</string>
+    <string name="song_prev">Previous</string>
+    <string name="song_next">Next</string>
     <string name="set_crackle_v">Crackle</string>
     <string name="set_crackle_t">Tape hiss and wow</string>
     <string name="set_crackle_sub_v">The vinyl under the music, for records from a folder. It grows with wear.</string>
