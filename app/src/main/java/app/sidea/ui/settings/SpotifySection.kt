@@ -5,6 +5,8 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -60,6 +62,10 @@ fun SpotifySection(saved: String, onSave: (String) -> Unit) {
     val error by spotify.error.collectAsStateWithLifecycle()
     var id by remember { mutableStateOf(saved) }
     val fingerprint = remember { runCatching { Spotify.fingerprint(c) }.getOrDefault("") }
+    val allow = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { res ->
+        val no = spotify.refused(res.resultCode, res.data)
+        if (no == null) spotify.connect(c, id, ask = false) else spotify.failed(no)
+    }
 
     SectionTitle("Spotify")
     UCard {
@@ -92,7 +98,14 @@ fun SpotifySection(saved: String, onSave: (String) -> Unit) {
             onSave(id)
         }, "Client ID", style = UType.Body.copy(fontFamily = Mono, fontSize = 14.sp))
         Spacer(Modifier.height(10.dp))
-        SoftButton(stringResource(R.string.spotify_connect), { spotify.connect(c, id, ask = true) }, enabled = id.length >= 16, icon = Icons.Rounded.Link)
+        SoftButton(stringResource(R.string.spotify_connect), {
+            // Ask in Spotify first (from here, in front), then connect quietly.
+            try {
+                allow.launch(spotify.permission(id))
+            } catch (_: ActivityNotFoundException) {
+                spotify.connect(c, id, ask = true)
+            }
+        }, enabled = id.length >= 16, icon = Icons.Rounded.Link)
         Spacer(Modifier.height(8.dp))
         val status = when {
             !spotify.installed() -> stringResource(R.string.spotify_missing)

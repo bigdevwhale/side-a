@@ -1,6 +1,8 @@
 package app.sidea.play
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import com.spotify.android.appremote.api.ConnectionParams
 import com.spotify.android.appremote.api.Connector
@@ -9,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.security.MessageDigest
+import java.util.UUID
 
 /**
  * Spotify's own remote control (the App Remote SDK), with a Client ID the person registers
@@ -75,6 +78,32 @@ class Spotify(private val context: Context) {
         }
     }
 
+    /**
+     * The one-time permission, asked in the Spotify app. Spotify can't open it by itself from the
+     * background on recent Android (the App Remote's own auth view gets blocked and the connection
+     * just hangs), so it's started from the settings screen, in front: the same request Spotify's auth
+     * library sends, without the library. Launch it for a result, then [connect] without [ask].
+     */
+    fun permission(clientId: String): Intent = Intent(SSO).setPackage(PACKAGE)
+        .putExtra("VERSION", 1)
+        .putExtra("CLIENT_ID", clientId)
+        .putExtra("REDIRECT_URI", REDIRECT)
+        .putExtra("RESPONSE_TYPE", "token")
+        .putExtra("SCOPES", arrayOf("app-remote-control"))
+        .putExtra("STATE", UUID.randomUUID().toString())
+
+    /** What Spotify said to the permission request, if it refused. */
+    fun refused(code: Int, data: Intent?): String? {
+        val reply = data?.getBundleExtra("REPLY")
+        val error = reply?.getString("ERROR") ?: data?.getStringExtra("ERROR")
+        return error ?: if (code == Activity.RESULT_OK) null else "cancelled"
+    }
+
+    fun failed(why: String) {
+        _link.value = Link.FAILED
+        _error.value = why
+    }
+
     fun disconnect() {
         remote?.let { SpotifyAppRemote.disconnect(it) }
         remote = null
@@ -83,6 +112,7 @@ class Spotify(private val context: Context) {
 
     companion object {
         const val PACKAGE = "com.spotify.music"
+        private const val SSO = "com.spotify.sso.action.START_AUTH_FLOW"
 
         /** The redirect URI to register in the Spotify dashboard. Nothing is ever sent there. */
         const val REDIRECT = "sidea://spotify"
