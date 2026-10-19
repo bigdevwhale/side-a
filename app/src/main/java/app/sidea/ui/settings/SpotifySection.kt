@@ -111,6 +111,9 @@ fun SpotifySection(saved: String, onSave: (String) -> Unit) {
             !spotify.installed() -> stringResource(R.string.spotify_missing)
             link == Spotify.Link.ON -> stringResource(R.string.spotify_on)
             link == Spotify.Link.CONNECTING -> stringResource(R.string.spotify_connecting)
+            // Spotify's way of saying it doesn't know this package and fingerprint for that Client ID.
+            link == Spotify.Link.FAILED && error.orEmpty().contains("AUTHENTICATION_SERVICE_UNAVAILABLE") ->
+                stringResource(R.string.spotify_unknown_app, c.packageName, fingerprint)
             link == Spotify.Link.FAILED -> stringResource(R.string.spotify_failed, error.orEmpty())
             id.isBlank() -> stringResource(R.string.spotify_none)
             else -> stringResource(R.string.spotify_ready)

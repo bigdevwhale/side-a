@@ -253,6 +253,8 @@
     <string name="shared_not_album">That isn’t a Spotify album or song.</string>
     <string name="shared_no_key">To fetch its name and cover, add your Spotify Client ID in Settings → Spotify.</string>
     <string name="shared_by_hand">Write the name myself</string>
+    <string name="spotify_unknown_app">Spotify doesn’t recognise this app. In your app in Spotify’s dashboard, add an Android package %1$s with SHA‑1 %2$s, save, wait a few minutes and connect again.</string>
+    <string name="arm_hint_skips">Previous and Next below change songs. Tap the arm to raise or lower the needle; dragging it while the needle is down scratches the record.</string>
     <string name="copy">Copy</string>
     <string name="set_players">Players</string>
     <string name="set_players_sub">Listening along with a streaming app</string>

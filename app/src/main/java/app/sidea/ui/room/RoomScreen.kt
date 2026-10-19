@@ -216,7 +216,7 @@ fun RoomScreen(id: Long, home: Home, go: Go, preview: RoomPreview? = null) {
                 when {
                     missing -> Text(stringResource(R.string.folder_lost), style = UType.Body.copy(color = U.c.lamp), textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
                     now.pickedUp -> PickedUp { if (folder) container.deck.drop() else container.stream.play() }
-                    folder -> FolderControls(now, container)
+                    folder -> FolderControls(now, container, home.settings.skips)
                     else -> StreamControls(r, stream, now, ::openPlayer)
                 }
                 // Songs by button, for those who want them.
@@ -320,7 +320,7 @@ private fun PickedUp(onDrop: () -> Unit) {
 
 @androidx.annotation.OptIn(UnstableApi::class)
 @Composable
-private fun FolderControls(now: Now, container: app.sidea.AppContainer) {
+private fun FolderControls(now: Now, container: app.sidea.AppContainer, skips: Boolean) {
     val deck = container.deck
     when (now.phase) {
         Phase.FLIP -> {
@@ -337,7 +337,7 @@ private fun FolderControls(now: Now, container: app.sidea.AppContainer) {
             if (now.playing) SoftButton(stringResource(R.string.lift), deck::lift, Modifier.fillMaxWidth(), icon = Icons.Rounded.KeyboardArrowUp)
             else PrimaryButton(stringResource(R.string.drop_v), deck::drop, Modifier.fillMaxWidth(), icon = Icons.Rounded.KeyboardArrowDown)
             Spacer(Modifier.height(10.dp))
-            Text(stringResource(R.string.arm_hint), style = UType.Small, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+            Text(stringResource(if (skips) R.string.arm_hint_skips else R.string.arm_hint), style = UType.Small, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
         }
     }
 }

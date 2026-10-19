@@ -246,6 +246,8 @@
     <string name="shared_not_album">Это не альбом и не песня из Spotify.</string>
     <string name="shared_no_key">Чтобы подтянуть название и обложку, добавь свой Spotify Client ID в Настройках → Spotify.</string>
     <string name="shared_by_hand">Вписать название самому</string>
+    <string name="spotify_unknown_app">Spotify не узнаёт это приложение. В своём приложении в кабинете Spotify добавь Android‑пакет %1$s с SHA‑1 %2$s, сохрани, подожди несколько минут и подключись снова.</string>
+    <string name="arm_hint_skips">«Назад» и «Дальше» ниже переключают песни. Нажми на тонарм, чтобы поднять или опустить иглу; если тянуть его с опущенной иглой, пластинка поцарапается.</string>
     <string name="copy">Скопировать</string>
     <string name="set_players">Плееры</string>
     <string name="set_players_sub">Слушать вместе со стримингом</string>
