@@ -373,13 +373,20 @@ private fun StreamControls(r: Record, s: StreamState, now: Now, openPlayer: () -
                     }
                 }
             }
+            val spotifyId by c.container.settings.settings.collectAsStateWithLifecycle(initialValue = null)
             PrimaryButton(stringResource(R.string.play_album), {
-                // The phone stays here if the player takes the album through its media session.
-                when (c.container.stream.playAlbum(r, s.now?.pkg ?: "")) {
-                    app.sidea.play.Started.HERE -> asked = System.currentTimeMillis()
-                    app.sidea.play.Started.THERE -> c.container.excused = true
-                    app.sidea.play.Started.NOWHERE -> failed = true
+                fun quietly() {
+                    // The phone stays here if the player takes the album through its media session.
+                    when (c.container.stream.playAlbum(r, s.now?.pkg ?: "")) {
+                        app.sidea.play.Started.HERE -> asked = System.currentTimeMillis()
+                        app.sidea.play.Started.THERE -> c.container.excused = true
+                        app.sidea.play.Started.NOWHERE -> failed = true
+                    }
                 }
+                val id = spotifyId?.spotifyId.orEmpty()
+                // With the person's own Spotify Client ID and the album's address, Spotify starts it without opening.
+                if (id.isNotBlank() && app.sidea.play.Spotify.isAlbum(r.link)) c.container.spotify.play(c, id, r.link!!) { quietly() }
+                else quietly()
             }, Modifier.fillMaxWidth(), icon = Icons.Rounded.PlayArrow)
             if (failed) Text(stringResource(R.string.play_album_failed), style = UType.Small, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().padding(top = 6.dp))
             Spacer(Modifier.height(10.dp))

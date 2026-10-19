@@ -49,6 +49,8 @@ data class Settings(
     val recorded: Boolean = false,
     /** Previous and next buttons in the room, changing songs without a scratch or a wait. */
     val skips: Boolean = false,
+    /** The person's own Spotify Client ID, for starting albums in Spotify without opening it. */
+    val spotifyId: String = "",
     /** The streaming player last heard, to open it from the turntable. */
     val player: String = "",
 ) {
@@ -81,6 +83,7 @@ class SettingsStore(context: Context) {
         player = this[PLAYER] ?: "",
         recorded = this[RECORDED] ?: false,
         skips = this[SKIPS] ?: false,
+        spotifyId = this[SPOTIFY_ID] ?: "",
     )
 
     suspend fun now(): Settings = settings.first()
@@ -99,6 +102,7 @@ class SettingsStore(context: Context) {
             it[PLAYER] = s.player
             it[RECORDED] = s.recorded
             it[SKIPS] = s.skips
+            it[SPOTIFY_ID] = s.spotifyId
         }
     }
 
@@ -114,5 +118,6 @@ class SettingsStore(context: Context) {
         val PLAYER = stringPreferencesKey("player")
         val RECORDED = booleanPreferencesKey("recorded")
         val SKIPS = booleanPreferencesKey("skips")
+        val SPOTIFY_ID = stringPreferencesKey("spotify_id")
     }
 }

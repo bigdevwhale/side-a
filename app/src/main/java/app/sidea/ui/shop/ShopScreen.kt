@@ -130,7 +130,9 @@ fun ShopScreen(home: Home, go: Go) {
                 SectionTitle(stringResource(R.string.find_album))
                 Option(Icons.Rounded.GraphicEq, stringResource(R.string.from_player), w(R.string.from_player_sub_v, R.string.from_player_sub_t), null)
                 PlayerNow(stream.granted, stream.now?.takeIf { !it.album.isNullOrBlank() }) { now ->
-                    container.draft.value = Draft(title = now.album.orEmpty(), artist = now.artist.orEmpty(), source = Source.STREAM, cover = now.art)
+                    // With Spotify connected, its own word on which album this is, to start it later without opening Spotify.
+                    val known = container.spotify.album.value?.takeIf { now.pkg == app.sidea.play.Spotify.PACKAGE && app.sidea.domain.Match.album(now.album.orEmpty(), "", it.first, null) }
+                    container.draft.value = Draft(title = now.album.orEmpty(), artist = now.artist.orEmpty(), source = Source.STREAM, cover = now.art, link = known?.second)
                     go.buy()
                 }
                 Spacer(Modifier.height(10.dp))

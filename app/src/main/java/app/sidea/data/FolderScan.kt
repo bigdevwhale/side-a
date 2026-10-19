@@ -18,6 +18,8 @@ data class Draft(
     val tracks: List<Track> = emptyList(),
     val cover: Bitmap? = null,
     val seed: Long = (1L..Long.MAX_VALUE / 2).random(),
+    /** Its address in the streaming player, if known. */
+    val link: String? = null,
 )
 
 /** Reads an album folder: its songs in order, their tags, and a sleeve picture if there is one. */

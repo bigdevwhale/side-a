@@ -130,6 +130,8 @@ fun SettingsScreen(home: Home, go: Go) {
                 Toggle(w(R.string.set_recorded_v, R.string.set_recorded_t), w(R.string.set_recorded_sub_v, R.string.set_recorded_sub_t), s.recorded) { v -> set { it.copy(recorded = v) } }
             }
 
+            SpotifySection(s.spotifyId) { v -> set { it.copy(spotifyId = v.trim()) } }
+
             SectionTitle(stringResource(R.string.set_players))
             UCard {
                 InfoRow(Icons.Rounded.GraphicEq, stringResource(R.string.set_players_sub), stringResource(if (granted) R.string.set_access_on else R.string.set_access_off)) { openListenerSettings(c) }

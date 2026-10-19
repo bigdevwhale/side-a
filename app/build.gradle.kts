@@ -112,6 +112,10 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.session)
+    // Spotify App Remote SDK (Apache-2.0, from github.com/spotify/android-sdk), for the optional
+    // Spotify Client ID: it talks to the Spotify app on the phone and reads its replies with Gson.
+    implementation(files("libs/spotify-app-remote-release-0.8.0.aar"))
+    implementation(libs.gson)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     testImplementation(libs.junit)

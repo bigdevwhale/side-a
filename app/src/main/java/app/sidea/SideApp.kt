@@ -11,7 +11,10 @@ import app.sidea.data.Library
 import app.sidea.data.SettingsStore
 import app.sidea.data.SideDatabase
 import app.sidea.play.Deck
+import app.sidea.play.Spotify
 import app.sidea.play.StreamWatch
+import app.sidea.domain.Match
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -25,6 +28,7 @@ class AppContainer(context: Context) {
     val library = Library(context, db, settings)
     val deck = Deck(context, db, settings)
     val stream = StreamWatch(context, db, settings)
+    val spotify = Spotify(context)
     val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
     /** A record picked in the shop, on its way to the counter. */
@@ -42,6 +46,17 @@ class AppContainer(context: Context) {
     /** Fire-and-forget so a write survives the screen being closed right after tapping. */
     fun write(block: suspend AppContainer.() -> Unit) {
         scope.launch { block() }
+    }
+
+    init {
+        // While a record plays in Spotify, remember where the album lives there, to start it from here next time.
+        scope.launch {
+            combine(stream.state, spotify.album) { s, a -> s to a }.collect { (s, a) ->
+                val r = s.record ?: return@collect
+                if (a == null || !s.matched || s.now?.pkg != Spotify.PACKAGE || Spotify.isAlbum(r.link)) return@collect
+                if (Match.album(r.title, "", a.first, null)) db.dao().link(r.id, a.second)
+            }
+        }
     }
 
     /** The phone was picked up while music was playing: the needle goes up. */

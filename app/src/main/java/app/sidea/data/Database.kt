@@ -1,6 +1,7 @@
 package app.sidea.data
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Entity
@@ -70,6 +71,8 @@ data class Record(
     val farewell: String = "",
     val listenedMs: Long = 0,
     val lastAt: Long = 0,
+    /** Where the album lives in a streaming player (spotify:album:…), once known: to start it from here. */
+    val link: String? = null,
 ) {
     val sourceOf: Source get() = Source.of(source)
     val placeOf: Place get() = Place.of(place)
@@ -142,6 +145,9 @@ interface RecordDao {
     @Query("DELETE FROM records WHERE id = :id")
     suspend fun delete(id: Long)
 
+    @Query("UPDATE records SET link = :link WHERE id = :id")
+    suspend fun link(id: Long, link: String)
+
     @Query("UPDATE records SET listenedMs = listenedMs + :ms, lastAt = :at WHERE id = :id")
     suspend fun listened(id: Long, ms: Long, at: Long = System.currentTimeMillis())
 
@@ -210,7 +216,7 @@ interface RecordDao {
     }
 }
 
-@Database(entities = [Record::class, Track::class, Scratch::class, Note::class, Session::class], version = 1, exportSchema = true)
+@Database(entities = [Record::class, Track::class, Scratch::class, Note::class, Session::class], version = 2, exportSchema = true, autoMigrations = [AutoMigration(from = 1, to = 2)])
 abstract class SideDatabase : RoomDatabase() {
     abstract fun dao(): RecordDao
 

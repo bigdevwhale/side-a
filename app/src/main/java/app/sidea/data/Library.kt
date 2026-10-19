@@ -24,6 +24,7 @@ class Library(private val context: Context, private val db: SideDatabase, privat
                 folder = draft.folder,
                 cover = draft.cover?.let { Covers.save(context, it) },
                 seed = draft.seed,
+                link = draft.link,
                 place = place.name,
                 gift = gift,
             ),

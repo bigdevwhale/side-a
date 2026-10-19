@@ -57,6 +57,15 @@ With notification access (it reads only what's playing, never your notifications
 
 *Play the album* in the room asks the player to start it without leaving Side A, the way a voice assistant does. Players that only take such requests from their partners (Spotify is one) get their search opened at the album instead.
 
+### Spotify, without opening it (optional)
+
+Spotify starts a chosen album only for apps registered with it. If you'd like that, register Side A yourself, free: *Settings → Spotify* walks you through it.
+
+1. In [Spotify's developer dashboard](https://developer.spotify.com/dashboard), create an app (any name), tick **Android**, and add the package name, SHA‑1 fingerprint and redirect URI that the settings show (tap to copy).
+2. Paste the app's **Client ID** into Side A and tap *Connect*; Spotify asks for your permission once.
+
+From then on *Play the album* starts it in Spotify quietly, through Spotify's own [App Remote SDK](https://github.com/spotify/android-sdk), which talks to the Spotify app on the phone (Side A still has no internet permission). A record learns its Spotify address when it's added from the player or first plays there. Starting a chosen album needs Spotify Premium; an app in Spotify's development mode serves up to 25 people you add yourself.
+
 ## Real recordings
 
 Optionally, Side A lays a **real recording** of vinyl crackle or tape hiss under the music, instead of the one made up in code. It plays under folder records and over your streaming app too, rising with wear. Both recordings are CC0 (public domain), from Freesound via GitHub; see [docs/SOUNDS.md](docs/SOUNDS.md).
@@ -79,4 +88,4 @@ Kotlin, Jetpack Compose, Room, DataStore, Media3 (ExoPlayer with a custom audio 
 
 ## License
 
-[MIT](LICENSE). The two recorded sounds are CC0; see [docs/SOUNDS.md](docs/SOUNDS.md).
+[MIT](LICENSE). The two recorded sounds are CC0; see [docs/SOUNDS.md](docs/SOUNDS.md). `app/libs/spotify-app-remote-release-0.8.0.aar` is Spotify's App Remote SDK, Apache‑2.0, from [spotify/android-sdk](https://github.com/spotify/android-sdk).
