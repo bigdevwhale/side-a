@@ -27,6 +27,7 @@ import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.Folder
 import androidx.compose.material.icons.rounded.GraphicEq
+import androidx.compose.material.icons.rounded.LibraryMusic
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -134,6 +135,10 @@ fun ShopScreen(home: Home, go: Go) {
                     val known = container.spotify.album.value?.takeIf { now.pkg == app.sidea.play.Spotify.PACKAGE && app.sidea.domain.Match.album(now.album.orEmpty(), "", it.first, null) }
                     container.draft.value = Draft(title = now.album.orEmpty(), artist = now.artist.orEmpty(), source = Source.STREAM, cover = now.art, link = known?.second)
                     go.buy()
+                }
+                if (home.settings.spotifyId.isNotBlank()) {
+                    Spacer(Modifier.height(10.dp))
+                    Option(Icons.Rounded.LibraryMusic, stringResource(R.string.from_spotify), stringResource(R.string.from_spotify_sub)) { go.spotify() }
                 }
                 Spacer(Modifier.height(10.dp))
                 Option(Icons.Rounded.Folder, stringResource(R.string.from_folder), w(R.string.from_folder_sub_v, R.string.from_folder_sub_t)) { pick.launch(null) }

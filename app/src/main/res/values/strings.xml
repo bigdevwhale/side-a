@@ -234,6 +234,16 @@
     <string name="spotify_ready">Saved. Tap Connect to allow it in Spotify.</string>
     <string name="spotify_missing">Spotify isn’t installed on this phone.</string>
     <string name="spotify_premium">Starting a chosen album needs Spotify Premium. A record learns its Spotify address the first time it plays there; until then the search opens.</string>
+    <string name="spotify_why_link">Spotify doesn’t know this record’s address yet, so its search opened. Play the album there once and next time it starts from here.</string>
+    <string name="spotify_why_failed">Spotify didn’t connect (%s), so its search opened. On Xiaomi phones, allow Side A to start Spotify when asked.</string>
+    <string name="from_spotify">Browse your Spotify</string>
+    <string name="from_spotify_sub">Recently played, your library and picks, without opening Spotify.</string>
+    <string name="spotify_browse">Your Spotify</string>
+    <string name="spotify_filter">Narrow down this shelf</string>
+    <string name="spotify_browse_failed">Spotify didn’t answer (%s). Check the connection in Settings → Spotify.</string>
+    <string name="spotify_empty">Nothing here.</string>
+    <string name="spotify_album">album</string>
+    <string name="spotify_take">To the counter</string>
     <string name="copy">Copy</string>
     <string name="set_players">Players</string>
     <string name="set_players_sub">Listening along with a streaming app</string>

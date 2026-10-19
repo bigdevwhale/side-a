@@ -227,6 +227,16 @@
     <string name="spotify_ready">Сохранено. Нажми «Подключить», чтобы разрешить в Spotify.</string>
     <string name="spotify_missing">Spotify на этом телефоне не установлен.</string>
     <string name="spotify_premium">Чтобы включать выбранный альбом, нужен Spotify Premium. Адрес альбома в Spotify пластинка узнаёт, когда впервые там прозвучит; до этого открывается поиск.</string>
+    <string name="spotify_why_link">Адрес этой пластинки в Spotify пока не известен, поэтому открылся поиск. Включи альбом там один раз — в следующий раз он запустится отсюда.</string>
+    <string name="spotify_why_failed">Spotify не подключился (%s), поэтому открылся поиск. На телефонах Xiaomi разреши «Стороне А» запускать Spotify, когда система спросит.</string>
+    <string name="from_spotify">Полистать свой Spotify</string>
+    <string name="from_spotify_sub">Недавнее, медиатека и подборки — не открывая Spotify.</string>
+    <string name="spotify_browse">Твой Spotify</string>
+    <string name="spotify_filter">Найти на этой полке</string>
+    <string name="spotify_browse_failed">Spotify не ответил (%s). Проверь подключение в Настройках → Spotify.</string>
+    <string name="spotify_empty">Здесь пусто.</string>
+    <string name="spotify_album">альбом</string>
+    <string name="spotify_take">На кассу</string>
     <string name="copy">Скопировать</string>
     <string name="set_players">Плееры</string>
     <string name="set_players_sub">Слушать вместе со стримингом</string>

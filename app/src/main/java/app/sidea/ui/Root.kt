@@ -43,6 +43,7 @@ import app.sidea.ui.room.RoomScreen
 import app.sidea.ui.settings.SettingsScreen
 import app.sidea.ui.shop.BuyScreen
 import app.sidea.ui.shop.ShopScreen
+import app.sidea.ui.shop.SpotifyScreen
 import app.sidea.ui.theme.U
 import java.time.LocalDate
 import java.time.ZoneId
@@ -97,6 +98,7 @@ class Go(private val nav: NavHostController) {
     fun record(id: Long) = nav.navigate("record/$id") { launchSingleTop = true }
     fun shop() = nav.navigate("shop") { launchSingleTop = true }
     fun buy() = nav.navigate("buy") { launchSingleTop = true }
+    fun spotify() = nav.navigate("spotify") { launchSingleTop = true }
     fun room(id: Long) = nav.navigate("room/$id") { launchSingleTop = true }
     fun archive() = nav.navigate("archive") { launchSingleTop = true }
     fun settings() = nav.navigate("settings") { launchSingleTop = true }
@@ -158,6 +160,7 @@ fun SideRoot(settings: Settings) {
             }
             composable("shop") { ShopScreen(home, go) }
             composable("buy") { BuyScreen(home, go) }
+            composable("spotify") { SpotifyScreen(home, go) }
             composable("room/{id}", arguments = listOf(navArgument("id") { type = NavType.LongType })) { e ->
                 RoomScreen(e.arguments?.getLong("id") ?: 0L, home, go)
             }

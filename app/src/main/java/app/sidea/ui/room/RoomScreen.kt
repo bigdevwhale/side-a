@@ -361,6 +361,8 @@ private fun StreamControls(r: Record, s: StreamState, now: Now, openPlayer: () -
             Spacer(Modifier.height(12.dp))
             var failed by remember { mutableStateOf(false) }
             var asked by remember { mutableStateOf(0L) }
+            // Why Spotify was opened after all, when there's a Client ID to explain.
+            var why by remember { mutableStateOf<String?>(null) }
             // Asked quietly and nothing came of it: the player ignores such requests, so open its search.
             LaunchedEffect(asked) {
                 if (asked == 0L) return@LaunchedEffect
@@ -384,10 +386,21 @@ private fun StreamControls(r: Record, s: StreamState, now: Now, openPlayer: () -
                     }
                 }
                 val id = spotifyId?.spotifyId.orEmpty()
+                why = null
                 // With the person's own Spotify Client ID and the album's address, Spotify starts it without opening.
-                if (id.isNotBlank() && app.sidea.play.Spotify.isAlbum(r.link)) c.container.spotify.play(c, id, r.link!!) { quietly() }
-                else quietly()
+                when {
+                    id.isNotBlank() && app.sidea.play.Spotify.isAlbum(r.link) -> c.container.spotify.play(c, id, r.link!!) {
+                        why = c.getString(R.string.spotify_why_failed, c.container.spotify.error.value.orEmpty())
+                        quietly()
+                    }
+                    id.isNotBlank() -> {
+                        why = c.getString(R.string.spotify_why_link)
+                        quietly()
+                    }
+                    else -> quietly()
+                }
             }, Modifier.fillMaxWidth(), icon = Icons.Rounded.PlayArrow)
+            why?.let { Text(it, style = UType.Small, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().padding(top = 6.dp)) }
             if (failed) Text(stringResource(R.string.play_album_failed), style = UType.Small, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().padding(top = 6.dp))
             Spacer(Modifier.height(10.dp))
             SoftButton(stringResource(R.string.open_player), openPlayer, Modifier.fillMaxWidth(), icon = Icons.AutoMirrored.Rounded.OpenInNew)

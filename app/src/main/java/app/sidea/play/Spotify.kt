@@ -4,7 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import com.spotify.android.appremote.api.ConnectionParams
+import com.spotify.android.appremote.api.ContentApi
+import com.spotify.protocol.types.Image
+import com.spotify.protocol.types.ListItem
 import com.spotify.android.appremote.api.Connector
 import com.spotify.android.appremote.api.SpotifyAppRemote
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,6 +37,7 @@ class Spotify(private val context: Context) {
     val album: StateFlow<Pair<String, String>?> = _album.asStateFlow()
 
     @Volatile private var remote: SpotifyAppRemote? = null
+    private val handler = android.os.Handler(android.os.Looper.getMainLooper())
     private var id = ""
 
     fun installed(): Boolean = SpotifyAppRemote.isSpotifyInstalled(context)
@@ -49,9 +54,20 @@ class Spotify(private val context: Context) {
         r?.let { SpotifyAppRemote.disconnect(it) }
         id = clientId
         _link.value = Link.CONNECTING
+        // Spotify sometimes never answers (a system dialog in the way, Spotify asleep): give up in a while.
+        var done = false
+        handler.postDelayed({
+            if (!done && _link.value == Link.CONNECTING) {
+                done = true
+                failed("no answer from Spotify")
+                failed()
+            }
+        }, 8_000)
         val params = ConnectionParams.Builder(clientId).setRedirectUri(REDIRECT).showAuthView(ask).build()
         SpotifyAppRemote.connect(from, params, object : Connector.ConnectionListener {
             override fun onConnected(app: SpotifyAppRemote) {
+                if (done) return SpotifyAppRemote.disconnect(app)
+                done = true
                 remote = app
                 _link.value = Link.ON
                 _error.value = null
@@ -63,6 +79,8 @@ class Spotify(private val context: Context) {
             }
 
             override fun onFailure(error: Throwable) {
+                if (done) return
+                done = true
                 remote = null
                 _link.value = Link.FAILED
                 _error.value = error.message ?: error.javaClass.simpleName
@@ -71,11 +89,36 @@ class Spotify(private val context: Context) {
         })
     }
 
-    /** Plays [uri] (a spotify:album:…) from the start; [failed] if Spotify can't be reached. */
+    /** Plays [uri] (a spotify:album:…) from its first song, as side A starts; [failed] if Spotify can't be reached. */
     fun play(from: Context, clientId: String, uri: String, failed: () -> Unit) {
         connect(from, clientId, ask = false, failed = failed) { app ->
-            app.playerApi.play(uri).setErrorCallback { failed() }
+            app.playerApi.skipToIndex(uri, 0).setErrorCallback {
+                // Some accounts can't pick a song; then just play the album.
+                app.playerApi.play(uri).setErrorCallback { failed() }
+            }
         }
+    }
+
+    /**
+     * What's on one of Spotify's shelves: the top ones (recently played, your library, picks) with
+     * [parent] null, or what's inside [parent]. Null if Spotify can't be reached.
+     */
+    fun browse(from: Context, clientId: String, parent: ListItem?, done: (List<ListItem>?) -> Unit) {
+        connect(from, clientId, ask = false, failed = { done(null) }) { app ->
+            val call = if (parent == null) app.contentApi.getRecommendedContentItems(ContentApi.ContentType.DEFAULT) else app.contentApi.getChildrenOfItem(parent, 50, 0)
+            call.setResultCallback { done(it.items?.toList().orEmpty()) }.setErrorCallback { e ->
+                failed(e.message ?: e.javaClass.simpleName)
+                done(null)
+            }
+        }
+    }
+
+    /** An item's picture, from Spotify's own cache. */
+    fun image(item: ListItem, done: (Bitmap?) -> Unit) {
+        val app = remote
+        val uri = item.imageUri
+        if (app == null || !app.isConnected || uri == null) return done(null)
+        app.imagesApi.getImage(uri, Image.Dimension.LARGE).setResultCallback { done(it) }.setErrorCallback { done(null) }
     }
 
     /**
