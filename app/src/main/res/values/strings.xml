@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Side A</string>
+    <string name="settings">Settings</string>
+    <string name="back">Back</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="next">Next</string>
+    <string name="start">Begin</string>
+    <string name="off">Off</string>
+    <string name="seconds">%d s</string>
+    <string name="minutes_short">%d min</string>
+    <string name="hours_short">%1$d h %2$d min</string>
+
+    <!-- Words that follow the look: _v for records, _t for cassettes. -->
+    <string name="format_vinyl">Records</string>
+    <string name="format_vinyl_sub">A walnut hi‑fi, a needle, the crackle of vinyl</string>
+    <string name="format_tape">Cassettes</string>
+    <string name="format_tape_sub">A silver tape deck, winding, the hiss of tape</string>
+    <string name="masthead_v">STEREO · 33⅓ RPM</string>
+    <string name="masthead_t">TYPE II · AUTO REVERSE</string>
+
+    <!-- Welcome -->
+    <string name="welcome_title">There is too much music.</string>
+    <string name="welcome_sub">A hundred million songs in your pocket, and hardly one heard all the way through. Here it’s the old way: one album a week, a whole side at a time, and the record wears in as you love it.</string>
+    <string name="pick_title">Records or cassettes?</string>
+    <string name="pick_sub">The whole app follows: how it looks, how it sounds, and what skipping a song does.</string>
+    <string name="pick_later">You can change it later in settings.</string>
+    <string name="rules_title">House rules</string>
+    <string name="rule_week_v">One record a week</string>
+    <string name="rule_week_t">One cassette a week</string>
+    <string name="rule_week_sub_v">The shop gets a delivery once a week. A week you don’t use doesn’t carry over.</string>
+    <string name="rule_week_sub_t">The shop gets a delivery once a week. A week you don’t use doesn’t carry over.</string>
+    <string name="rule_whole">Whole albums, in order</string>
+    <string name="rule_whole_sub_v">Side A, turn it over, side B. No shuffle, no playlists.</string>
+    <string name="rule_whole_sub_t">Side A, eject, turn it over, side B. No shuffle, no playlists.</string>
+    <string name="rule_mark_v">Skipping scratches</string>
+    <string name="rule_mark_t">Skipping takes time</string>
+    <string name="rule_mark_sub_v">Move the needle while it’s down and the record keeps the mark, and clicks there each time round. Lift it first and it’s fine.</string>
+    <string name="rule_mark_sub_t">A cassette can’t jump: it winds, at the speed of a real deck. A skip in another player creases the tape.</string>
+    <string name="rule_shelf">Twenty‑four places on the shelf</string>
+    <string name="rule_shelf_sub_v">When it’s full, one record goes to the second‑hand shop, with a farewell line.</string>
+    <string name="rule_shelf_sub_t">When the rack’s full, one cassette goes to the second‑hand shop, with a farewell line.</string>
+    <string name="rule_gift">The first three are a gift</string>
+    <string name="rule_gift_sub_v">For the records you already own and love.</string>
+    <string name="rule_gift_sub_t">For the albums you already own and love.</string>
+
+    <!-- Home -->
+    <string name="shelf_title">Shelf · %1$d of %2$d</string>
+    <string name="shelf_title_t">Rack · %1$d of %2$d</string>
+    <string name="shelf_empty_v">The shelf is empty</string>
+    <string name="shelf_empty_t">The rack is empty</string>
+    <string name="shelf_empty_sub_v">Start with three records you already love: the shop gives them away.</string>
+    <string name="shelf_empty_sub_t">Start with three albums you already love: the shop gives them away.</string>
+    <string name="go_shop_v">To the record shop</string>
+    <string name="go_shop_t">To the tape shop</string>
+    <string name="archive">Second‑hand shop</string>
+    <string name="archive_none_v">Nothing let go yet</string>
+    <string name="archive_none_t">Nothing let go yet</string>
+    <string name="archive_sub_v">Records you let go. Each one can be bought back, as that week’s buy.</string>
+    <string name="archive_sub_t">Cassettes you let go. Each one can be bought back, as that week’s buy.</string>
+    <string name="listened_total">Listened so far: %s</string>
+    <string name="now_playing_v">On the turntable</string>
+    <string name="now_playing_t">In the deck</string>
+    <string name="now_waiting_v">Needle up</string>
+    <string name="now_waiting_t">Stopped</string>
+    <string name="now_flip_v">Turn it over</string>
+    <string name="now_flip_t">Turn it over</string>
+
+    <!-- Shop -->
+    <string name="shop_v">Record shop</string>
+    <string name="shop_t">Tape shop</string>
+    <string name="shop_open_v">Delivery’s in: one record this week</string>
+    <string name="shop_open_t">Delivery’s in: one cassette this week</string>
+    <string name="shop_closed">Next delivery: %s</string>
+    <string name="shop_rules_v">One record a week, and an unused week doesn’t carry over. Put others aside on the counter for later weeks.</string>
+    <string name="shop_rules_t">One cassette a week, and an unused week doesn’t carry over. Put others aside on the counter for later weeks.</string>
+    <string name="find_album">Find an album</string>
+    <string name="from_player">From your player</string>
+    <string name="from_player_sub_v">What’s playing in your streaming app. You listen there; the record lives here.</string>
+    <string name="from_player_sub_t">What’s playing in your streaming app. You listen there; the cassette lives here.</string>
+    <string name="from_folder">From a folder on the phone</string>
+    <string name="from_folder_sub_v">Your own files. Played here: needle, crackle and all.</string>
+    <string name="from_folder_sub_t">Your own files. Played here: tape hiss, wow and all.</string>
+    <string name="folder_empty">No music found in that folder.</string>
+    <string name="by_hand">Write the name</string>
+    <string name="by_hand_sub">An album you’ll play in another app.</string>
+    <string name="scanning">Going through the sleeves…</string>
+    <string name="player_access">To see what your player is playing, Side A needs notification access. It reads only the song, never your notifications.</string>
+    <string name="player_allow">Allow access</string>
+    <string name="player_nothing">Start an album in your player and it shows up here.</string>
+    <string name="player_now">Playing now</string>
+    <string name="held_title">On the counter · %1$d of %2$d</string>
+    <string name="held_none">Nothing put aside.</string>
+    <string name="take_home">Take it home</string>
+    <string name="take_gift">Take it, it’s a gift</string>
+    <string name="put_back">Put back</string>
+    <string name="hold">Put aside on the counter</string>
+    <string name="hold_sub">It waits for a later week.</string>
+    <string name="counter">At the counter</string>
+    <string name="album_title">Album</string>
+    <string name="album_artist">Artist</string>
+    <string name="source_folder_v">From the folder: %1$s, %2$s. Plays here on the turntable.</string>
+    <string name="source_folder_t">From the folder: %1$s, %2$s. Plays here in the tape deck.</string>
+    <string name="source_stream">Plays in your streaming app; Side A listens along, learns the songs and keeps the record.</string>
+    <string name="full_title_v">The shelf is full</string>
+    <string name="full_title_t">The rack is full</string>
+    <string name="full_sub_v">To bring this one home, another goes to the second‑hand shop. Which one?</string>
+    <string name="full_sub_t">To bring this one home, another goes to the second‑hand shop. Which one?</string>
+    <string name="let_go_title">To the second‑hand shop</string>
+    <string name="let_go_sub">A line to remember it by. It keeps its notes and its marks.</string>
+    <string name="farewell_hint">Thank you for…</string>
+    <string name="let_go_do">Let it go</string>
+    <string name="farewell">Farewell</string>
+
+    <!-- Record -->
+    <string name="plays_less">Less than one play</string>
+    <string name="since">On the shelf since %s</string>
+    <string name="since_gift">A gift, since %s</string>
+    <string name="held_since">On the counter since %s</string>
+    <string name="gone_since">Let go on %s</string>
+    <string name="put_on_v">Put it on the turntable</string>
+    <string name="put_on_t">Put it in the deck</string>
+    <string name="folder_lost">The music folder can’t be reached any more. Was it moved?</string>
+    <string name="held_wait">It waits on the counter until a week with a free buy.</string>
+    <string name="buy_back">Buy it back</string>
+    <string name="buy_back_wait">It can be bought back in a week with a free buy.</string>
+    <string name="songs">Songs</string>
+    <string name="songs_later_v">The songs appear as the record plays.</string>
+    <string name="songs_later_t">The songs appear as the tape plays.</string>
+    <string name="side_a">Side A</string>
+    <string name="side_b">Side B</string>
+    <string name="inner_sleeve_v">Inner sleeve</string>
+    <string name="inner_sleeve_t">Inside the J‑card</string>
+    <string name="notes_none">Nothing written yet.</string>
+    <string name="note_add">Write a line</string>
+    <string name="note_delete">Rub this line out?</string>
+    <string name="rename">Rename</string>
+    <string name="return_shop">Take it back to the shop</string>
+    <string name="note_title_v">A line on the sleeve</string>
+    <string name="note_title_t">A line on the J‑card</string>
+    <string name="note_sub">Where you were, what it brought back. In a year you’ll find it here.</string>
+    <string name="note_hint">Rain, the night train, that summer…</string>
+    <string name="note_save">Write it</string>
+    <string name="note_skip">No line</string>
+
+    <!-- The room -->
+    <string name="room">Listening room</string>
+    <string name="take_off_v">Take it off</string>
+    <string name="take_off_t">Eject</string>
+    <string name="silence_v">Silence before the needle</string>
+    <string name="silence_t">Silence before the tape</string>
+    <string name="silence_sub">Let your ears rest. Put the phone down. The music is about to start.</string>
+    <string name="silence_skip">Skip</string>
+    <string name="picked_up_v">The needle went up</string>
+    <string name="picked_up_t">The tape stopped</string>
+    <string name="picked_up_sub">The phone was picked up. Put it down and just listen.</string>
+    <string name="drop_v">Lower the needle</string>
+    <string name="drop_t">Play</string>
+    <string name="lift">Lift the needle</string>
+    <string name="arm_hint">Drag the arm to move the needle. While it’s down, it scratches the record.</string>
+    <string name="tape_hint">Winding takes as long as on a real deck. ⏏ turns the cassette over.</string>
+    <string name="side_over_v">Side A has run out.</string>
+    <string name="side_over_t">Side A has run out.</string>
+    <string name="flip_v">Turn it over to side B</string>
+    <string name="flip_t">Eject and turn it over</string>
+    <string name="both_sides">Both sides played. Sit a moment in the quiet.</string>
+    <string name="key_rew">Rew</string>
+    <string name="key_play">Play</string>
+    <string name="key_stop">Stop</string>
+    <string name="key_ff">FF</string>
+    <string name="key_flip">Flip</string>
+    <string name="stream_start">Start “%s” in your player, from the first song.</string>
+    <string name="stream_other">Playing now: %s, another album.</string>
+    <string name="play_album">Play the album</string>
+    <string name="play_album_failed">No player to ask. Open it once, then try again.</string>
+    <string name="open_player">Open the player</string>
+    <string name="player">Player</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="stream_hint_v">Skipping a song in the player scratches the record.</string>
+    <string name="stream_hint_t">Skipping a song in the player creases the tape.</string>
+
+    <!-- Settings -->
+    <string name="set_look">Look</string>
+    <string name="set_look_sub">Your shelf stays the same; only the room changes around it.</string>
+    <string name="set_delivery">Delivery day</string>
+    <string name="set_delivery_sub">The day each week the shop has something new.</string>
+    <string name="set_silence_v">Silence before the needle</string>
+    <string name="set_silence_t">Silence before the tape</string>
+    <string name="set_silence_sub">A pause to rest the ears before an album.</string>
+    <string name="set_strict_v">Picking up the phone lifts the needle</string>
+    <string name="set_strict_t">Picking up the phone stops the tape</string>
+    <string name="set_strict_sub">Leave the app with the screen on and the music pauses. With the screen off it plays on.</string>
+    <string name="set_crackle_v">Crackle</string>
+    <string name="set_crackle_t">Tape hiss and wow</string>
+    <string name="set_crackle_sub_v">The vinyl under the music, for records from a folder. It grows with wear.</string>
+    <string name="set_crackle_sub_t">The tape under the music, for albums from a folder. It grows with wear.</string>
+    <string name="crackle_off">Clean</string>
+    <string name="crackle_soft">Soft</string>
+    <string name="crackle_real">Real</string>
+    <string name="set_shade">Theme</string>
+    <string name="shade_native">Its own</string>
+    <string name="shade_light">Light</string>
+    <string name="shade_dark">Dark</string>
+    <string name="shade_system">System</string>
+    <string name="shade_sub_v">Its own: records live in a dark room.</string>
+    <string name="shade_sub_t">Its own: cassettes live in daylight.</string>
+    <string name="set_recorded_v">Real vinyl recording</string>
+    <string name="set_recorded_t">Real tape recording</string>
+    <string name="set_recorded_sub_v">A recorded crackle instead of the made-up one, under folder records and over your streaming app too.</string>
+    <string name="set_recorded_sub_t">A recorded tape hiss instead of the made-up one, under folder albums and over your streaming app too.</string>
+    <string name="set_players">Players</string>
+    <string name="set_players_sub">Listening along with a streaming app</string>
+    <string name="set_access_on">Notification access is on</string>
+    <string name="set_access_off">Allow notification access</string>
+    <string name="set_battery">Let the music play on</string>
+    <string name="set_battery_sub">Some phones stop apps to save battery</string>
+    <string name="set_language">Language</string>
+    <string name="set_lang_system">System</string>
+    <string name="set_about">About</string>
+    <string name="set_privacy">Side A has no account, no ads and no internet permission. Your shelf, notes and listening stay on this phone. Music isn’t sold or streamed here: it’s yours, from your folders or your own player.</string>
+
+    <plurals name="plays">
+        <item quantity="one">%d play</item>
+        <item quantity="other">%d plays</item>
+    </plurals>
+    <plurals name="scratches">
+        <item quantity="one">%d scratch</item>
+        <item quantity="other">%d scratches</item>
+    </plurals>
+    <plurals name="creases">
+        <item quantity="one">%d crease</item>
+        <item quantity="other">%d creases</item>
+    </plurals>
+    <plurals name="songs">
+        <item quantity="one">%d song</item>
+        <item quantity="other">%d songs</item>
+    </plurals>
+    <plurals name="held">
+        <item quantity="one">%d on the counter</item>
+        <item quantity="other">%d on the counter</item>
+    </plurals>
+    <plurals name="gifts_v">
+        <item quantity="one">The first shelf: %d more record free</item>
+        <item quantity="other">The first shelf: %d more records free</item>
+    </plurals>
+    <plurals name="gifts_t">
+        <item quantity="one">The first rack: %d more cassette free</item>
+        <item quantity="other">The first rack: %d more cassettes free</item>
+    </plurals>
+    <plurals name="gone_v">
+        <item quantity="one">%d record let go</item>
+        <item quantity="other">%d records let go</item>
+    </plurals>
+    <plurals name="gone_t">
+        <item quantity="one">%d cassette let go</item>
+        <item quantity="other">%d cassettes let go</item>
+    </plurals>
+</resources>

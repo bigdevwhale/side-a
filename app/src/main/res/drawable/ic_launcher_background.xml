@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Walnut. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:fillColor="#5E3B23" android:pathData="M0,0h108v108h-108z" />
+    <path android:fillColor="#4A2D1A" android:pathData="M0,20h108v3h-108zM0,47h108v2h-108zM0,78h108v4h-108zM0,96h108v2h-108z" />
+</vector>
