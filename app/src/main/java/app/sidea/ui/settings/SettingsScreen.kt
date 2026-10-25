@@ -42,6 +42,7 @@ import app.sidea.ui.Home
 import app.sidea.ui.Language
 import app.sidea.ui.T
 import app.sidea.ui.components.Chip
+import app.sidea.ui.components.CommunityLinks
 import app.sidea.ui.components.InfoRow
 import app.sidea.ui.components.SectionTitle
 import app.sidea.ui.components.Segmented
@@ -151,6 +152,8 @@ fun SettingsScreen(home: Home, go: Go) {
                 Chip("English", cur == Language.EN, { Language.set(Language.EN) })
                 Chip("Русский", cur == Language.RU, { Language.set(Language.RU) })
             }
+
+            CommunityLinks()
 
             SectionTitle(stringResource(R.string.set_about))
             Text(stringResource(R.string.set_privacy), style = UType.Sub)
